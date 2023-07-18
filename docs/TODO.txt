@@ -1,4 +1,1 @@
 Things to do:
-
-1) Add Comments Explaining Code
-2) Crop background.jpg to lessen blank cells

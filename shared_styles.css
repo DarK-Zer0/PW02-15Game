@@ -275,6 +275,7 @@ pre {
 	transform: translateX(-50%);
 	display: grid;
 	grid-template-columns: repeat(4, 99px);
+	border-collapse: collapse;
 }
 
 .cell {
@@ -283,6 +284,12 @@ pre {
 	height: 96px;
 	margin: 0;
 	background-image: url('./img/background.jpg');
+	font-size: 32pt;
+	color: silver;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .cell[data-empty] {
 	background-image: none;
