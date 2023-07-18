@@ -269,20 +269,24 @@ pre {
 
 /* Custom CSS */
 .board {
+	/* Positions board in top-ish center */
 	position: absolute;
 	top: 10%;
 	left: 50%;
 	transform: translateX(-50%);
+	/* Sets board to same size as background.jpg */
+	width: 400px;
+	height: 400px;
+	/* Makes a new row every 4 cells */
 	display: grid;
-	grid-template-columns: repeat(4, 99px);
-	border-collapse: collapse;
+	grid-template-columns: repeat(4, 100px);
+	gap: 0;
 }
 
 .cell {
 	border: 2px solid black;
-	width: 96px;
-	height: 96px;
 	margin: 0;
+	padding: 0;
 	background-image: url('./img/background.jpg');
 	font-size: 32pt;
 	color: deepskyblue;
