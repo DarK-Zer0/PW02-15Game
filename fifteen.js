@@ -44,3 +44,23 @@ function imgPos (cell) {
 
     return `${x}px ${y}px`;
 }
+
+// Detects if a neighbor cell is the empty cell and returns a data-img value 
+function nearEmpty (cell) {
+    const emptyCell = document.querySelector('[data-empty]');
+    const emptyRow = parseInt(emptyCell.dataset.row);
+    const emptyCol = parseInt(emptyCell.dataset.column);
+    const row = parseInt(cell.dataset.row);
+    const col = parseInt(cell.dataset.column);
+    if (emptyRow == row && emptyCol == col) { // Checks if given cell is the empty cell
+        return null;
+    }
+
+    // Calculates the displacement from the given cell and the empty cell
+    const rowDisp = Math.abs(row - emptyRow);
+    const colDisp = Math.abs(col - emptyCol);
+    if (rowDisp > 1 || colDisp > 1) { // Checks if given cell and empty cell are not adjacent
+        return null;
+    }
+    return `${emptyRow}${emptyCol}`;
+}
