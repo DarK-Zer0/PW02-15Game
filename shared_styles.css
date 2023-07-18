@@ -266,3 +266,24 @@ pre {
 	border: 1px dashed blue;
 	padding: 0.2em 0.5em;
 }
+
+/* Custom CSS */
+.table {
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	transform: translateX(-50%);
+	display: grid;
+	grid-template-columns: repeat(4, 99px);
+}
+
+.cell {
+	border: 2px solid black;
+	width: 96px;
+	height: 96px;
+	margin: 0;
+	background-image: url('./img/background.jpg');
+}
+.cell[data-empty] {
+	background-image: none;
+}
