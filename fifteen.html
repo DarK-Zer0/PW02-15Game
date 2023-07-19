@@ -1,18 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>15 Game</title>
-		<meta charset="utf-8">
-        <link rel="icon" href="./img/15GameIcon.png">
-		<link rel="stylesheet" href="./shared_styles.css">
-        <script type="text/javascript" src="./fifteen.js"></script>
-	</head>
-	<body>
-		<h2 class= "game-header"> <img src="./img/sliding-puzzle.png"> </img></h2>
-		<div class="board"></div>	
-		<div class="button">	
-	    	<button onclick="shuffleBoard()"> shuffle</button> 
-		</div>
-		<script>createBoard();</script>
-	</body>
+<head>
+    <title>15 Game</title>
+    <meta charset="utf-8">
+    <link rel="icon" href="./img/15GameIcon.png">
+    <link rel="stylesheet" href="./shared_styles.css">
+    <script type="text/javascript" src="./fifteen.js"></script>
+    <style>
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 430px;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="game-header"> <img src="./img/sliding-puzzle.png"></h2>
+    <div class="board"></div>
+    <div class="button">
+        <button onclick="shuffleBoard()">Shuffle</button>
+    </div>
+    <script>createBoard();</script>
+
+    <!-- Game song -->
+    <div class="timer-container">
+        <label id="minutes">00</label>
+        <label id="colon">:</label>
+        <label id="seconds">00</label>
+    </div>
+    <audio controls autoplay loop src="game_song.mp3"></audio>
+	
+	<!-- Timer feature -->
+    <script type="text/javascript">
+        var minutesLabel = document.getElementById("minutes");
+        var secondsLabel = document.getElementById("seconds");
+        var totalSeconds = 0;
+        setInterval(setTime, 1000);
+
+        function setTime() {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds % 60);
+            minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+        }
+
+        function pad(val) {
+            var valString = val + "";
+            if (valString.length < 2) {
+                return "0" + valString;
+            } else {
+                return valString;
+            }
+        }
+    </script>
+</body>
 </html>
