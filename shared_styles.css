@@ -295,6 +295,11 @@ pre {
 	justify-content: center;
 	align-items: center;
 }
+.cell:not([data-empty]):hover {
+	border-color: red;
+	color: #006600;
+	text-decoration: underline;
+}
 .cell[data-empty] {
 	background-image: none;
 }
