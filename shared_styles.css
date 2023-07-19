@@ -305,6 +305,11 @@ pre {
 }
 
 /* Best Times CSS */
+div .times {
+	max-height: 300px;
+	width: 120px;
+	overflow: auto;
+}
 .times {
 	position: absolute;
 	top: 50%;

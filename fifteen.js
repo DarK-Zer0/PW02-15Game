@@ -232,15 +232,19 @@ function displayTimes() {
     container.className = 'times';
     document.body.appendChild(container);
   }
+  // Check if the header of the list already exists
+  let h2 = container.querySelector('.times');
+  if (!h2) {
+    // Create a heading element for the title of Past Times List
+    h2 = document.createElement('h2');
+    h2.textContent = 'Session Times';
+    h2.className = 'times';
+    container.appendChild(h2);
+  }
 
   // Check if the unordered list element already exists
   let ul = container.querySelector('.times');
   if (!ul) {
-    // Create a heading element for the title of Past Times List
-    const h2 = document.createElement('h2');
-    h2.textContent = 'Session Times';
-    h2.className = 'times';
-    container.appendChild(h2);
     // Create an unordered list element
     ul = document.createElement('ul');
     ul.className = 'times';
