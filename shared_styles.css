@@ -299,6 +299,7 @@ pre {
 	border-color: red;
 	color: #006600;
 	text-decoration: underline;
+	cursor: pointer;
 }
 .cell[data-empty] {
 	background-image: none;
