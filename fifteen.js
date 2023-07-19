@@ -142,7 +142,11 @@ function shuffleBoard() {
       emptyCell = randomCell; // Update the reference to the empty cell
     }
   }
-  runTimer();
+  if (totalSeconds == 0) {
+    runTimer();
+  } else {
+    totalSeconds = 0;
+  }
 }
   
 // Swaps the content of two cells
