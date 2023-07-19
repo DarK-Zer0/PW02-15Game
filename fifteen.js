@@ -99,30 +99,75 @@ function shiftCell (cell) {
     cell.textContent = '';
 }
 
-// Finds and returns the locations of all the neighbors of the empty cell
-function emptyNeighbor () {
-    let neighbors = ['', '', '', ''];
+// Code for Shuffle Button
+document.querySelector('.button button').addEventListener('click', function() {
+    shuffleBoard();
+});
+
+function shuffleBoard() {
+    const cells = document.querySelectorAll('.cell:not([data-empty])');
+  
+    const getRandomNeighbor = (cell) => {
+      const neighbors = [];
+  
+      const emptyCell = document.querySelector('[data-empty]');
+      const emptyRow = parseInt(emptyCell.dataset.row);
+      const emptyCol = parseInt(emptyCell.dataset.column);
+  
+      const row = parseInt(cell.dataset.row);
+      const col = parseInt(cell.dataset.column);
+  
+      if (emptyRow === row) {
+        if (Math.abs(emptyCol - col) === 1) {
+          neighbors.push(cell);
+        }
+      } else if (emptyCol === col) {
+        if (Math.abs(emptyRow - row) === 1) {
+          neighbors.push(cell);
+        }
+      }
+  
+      return neighbors[Math.floor(Math.random() * neighbors.length)];
+    };
+  
     const emptyCell = document.querySelector('[data-empty]');
-    const row = parseInt(emptyCell.dataset.row);
-    const col = parseInt(emptyCell.dataset.column);
+  
+    for (let i = 0; i < 2000; i++) { // Repeat the shuffle process multiple times
+      const randomIndex = Math.floor(Math.random() * cells.length);
+      const randomCell = cells[randomIndex];
+      const neighborCell = getRandomNeighbor(randomCell);
+  
+      if (neighborCell != null) {
+        swapCells(neighborCell, emptyCell);
+        emptyCell.removeAttribute('data-empty');
+       
+      }
+    }
+  }
+  
+  // Swaps the content of two cells
+  function swapCells(cell1, cell2) {
+    const tempDataImg = cell1.getAttribute('data-img');
+    const tempText = cell1.textContent;
+    const isEmptyCell1 = cell1.hasAttribute('data-empty');
+    const isEmptyCell2 = cell2.hasAttribute('data-empty');
 
-    rowMax = rows - 1;
-    colMax = cols - 1;
-    // If empty cell is at an edge, there can't be a neighbor past it
-    if (row == 0) neighbors[0] = null;
-    if (col == 0) neighbors[3] = null;
-    if (row == rowMax) neighbors[2] = null;
-    if (col == colMax) neighbors[1] = null;
-
-    // Stores the valid neighbors in clockwise order
-    const up = row+1, right = col+1, down = row-1, left = col-1;
-    for (let i = 0; i < 4; i++) {
-        if (neighbors[i] == null) continue;
-        if (i == 0) neighbors[i] = `${up}${col}`;
-        if (i == 1) neighbors[i] = `${row}${right}`;
-        if (i == 2) neighbors[i] = `${down}${col}`;
-        if (i == 3) neighbors[i] = `${row}${left}`;
+    cell1.setAttribute('data-img', cell2.getAttribute('data-img'));
+    cell1.textContent = cell2.textContent;
+    if (isEmptyCell2) {
+        cell1.setAttribute('data-empty', '1');
+    } else {
+        cell1.removeAttribute('data-empty');
     }
 
-    return neighbors;
+    cell2.setAttribute('data-img', tempDataImg);
+    cell2.textContent = tempText;
+    if (isEmptyCell1) {
+        cell2.setAttribute('data-empty', '1');
+    } else {
+        cell2.removeAttribute('data-empty');
+    }
+
+    cell1.style.backgroundPosition = imgPos(cell1);
+    cell2.style.backgroundPosition = imgPos(cell2);
 }
