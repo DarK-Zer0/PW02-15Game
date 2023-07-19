@@ -22,7 +22,7 @@ function createBoard () {
             }
             // Adds an event listener to the cell that calls the swapCell function when clicked
             cell.addEventListener('click', () => {
-                swapCell(cell);
+                shiftCell(cell);
             });
         }
     }
@@ -76,7 +76,7 @@ function nearEmpty (cell) {
     return `${emptyRow}${emptyCol}`;
 }
 // Swaps a non-empty cell with an empty cell
-function swapCell (cell) {
+function shiftCell (cell) {
     const emptyPos = nearEmpty(cell);
     if (emptyPos == null) { // Does nothing if empty cell is not found adjacent to non-empty cell
         return;
