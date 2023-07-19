@@ -249,7 +249,6 @@ pre {
 .board {
 	/* Centers the game board horizontally */
     margin: 0 auto;
-
     /* Sets board to same size as background.jpg */
     width: 400px;
     height: 400px;

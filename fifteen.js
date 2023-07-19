@@ -204,7 +204,7 @@ function stopTimer() {
   timer = null;
 }
 
-// Code for Win Condition
+// Code for Game Time
 function gameWon() {
   const cells = document.querySelectorAll('.cell');
   for (const cell of cells) {
@@ -252,3 +252,18 @@ function showBest(secondsTaken) {
     p.innerHTML = `${secToMins(bestTime)} <br>Moves: ${leastMoves}`;
   }
 }
+
+// Code for Different Puzzle Sizes
+function setGrid(choice) { // choice = cell rows and columns
+  const cellWidth = parseInt(400 / choice); 
+  const style = document.createElement('style');
+  style.textContent = `.board { grid-template-columns: repeat(${choice}, ${cellWidth}px); }`;
+  document.head.appendChild(style);
+}
+
+// Code for Different Background Images
+const bgImg = ['./img/background.jpg', 
+  './img/background2.jpg', 
+  './img/background3.jpg', 
+  './img/background4.jpg', 
+  './img/background5.jpg'];
