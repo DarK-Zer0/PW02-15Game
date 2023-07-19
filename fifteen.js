@@ -100,3 +100,63 @@ function shiftCell (cell) {
 }
 
 // Code for Shuffle Button
+document.querySelector('.button button').addEventListener('click', function() {   
+        shuffleBoard();    
+});
+
+function shuffleBoard() {
+    const cells = document.querySelectorAll('.cell:not([data-empty])');
+  
+    const getRandomNeighbor = (cell) => {
+      const neighbors = [];
+  
+      let emptyCell = document.querySelector('[data-empty]');
+      const emptyRow = parseInt(emptyCell.dataset.row);
+      const emptyCol = parseInt(emptyCell.dataset.column);
+  
+      const row = parseInt(cell.dataset.row);
+      const col = parseInt(cell.dataset.column);
+  
+      if (emptyRow === row) {
+        if (Math.abs(emptyCol - col) === 1) {
+          neighbors.push(cell);
+        }
+      } else if (emptyCol === col) {
+        if (Math.abs(emptyRow - row) === 1) {
+          neighbors.push(cell);
+        }
+      }
+  
+      return neighbors[Math.floor(Math.random() * neighbors.length)];
+    };
+  
+    let emptyCell = document.querySelector('[data-empty]');
+  
+    for (let i = 0; i < 1000; i++) { // Repeat the shuffle process multiple times
+      const randomIndex = Math.floor(Math.random() * cells.length);
+      let randomCell = cells[randomIndex];
+      const neighborCell = getRandomNeighbor(randomCell);
+  
+      if (neighborCell != null) {
+        swapCells(neighborCell, emptyCell);
+        emptyCell.removeAttribute('data-empty');
+        randomCell.setAttribute('data-empty', '1');
+        emptyCell = randomCell; // Update the reference to the empty cell
+      }
+    }
+  }
+  
+  // Swaps the content of two cells
+  function swapCells(cell1, cell2) {
+    const tempDataImg = cell1.getAttribute('data-img');
+    const tempText = cell1.textContent;
+  
+    cell1.setAttribute('data-img', cell2.getAttribute('data-img'));
+    cell1.textContent = cell2.textContent;
+  
+    cell2.setAttribute('data-img', tempDataImg);
+    cell2.textContent = tempText;
+  
+    cell1.style.backgroundPosition = imgPos(cell1);
+    cell2.style.backgroundPosition = imgPos(cell2);
+  }
