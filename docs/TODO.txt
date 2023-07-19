@@ -1,5 +1,5 @@
 Things to do:
 
-1) Add function to check for adjacent empty cells
-2) Add click functionality
-3) Add win condition
+- Add Shuffle functionality (based on requirements)
+- Add win condition
+- Add a timer and music
