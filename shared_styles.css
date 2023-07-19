@@ -304,4 +304,19 @@ pre {
   font-size: 5em;
 }
 
+/* Best Times CSS */
+.times {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+}
+.times h2 {
+	font-size: 24pt;
+	text-align: center;
+}
+.times ul {
+	font-size: 22pt;
+}
+
 

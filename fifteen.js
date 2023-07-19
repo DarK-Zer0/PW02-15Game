@@ -1,6 +1,8 @@
 // Global Variables
 var rows = 4, cols = 4, 
-  totalSeconds = 0, timer = 0;
+  totalSeconds = 0, timer = null,
+  pastTimes = [];
+// Code for Game Board
 function createBoard () {
     const table = document.querySelector('.board');
 
@@ -99,6 +101,10 @@ function shiftCell (cell) {
     const number = cell.textContent;
     emptyCell.textContent = number;
     cell.textContent = '';
+
+    // Check for win condition
+    let gameOver = gameWon();
+    if (gameOver) endGame();
 }
 
 // Code for Shuffle Button
@@ -142,7 +148,8 @@ function shuffleBoard() {
       emptyCell = randomCell; // Update the reference to the empty cell
     }
   }
-  if (timer == 0) {
+  // Initializes/Restarts the Timer
+  if (!timer) {
     runTimer();
   } else {
     totalSeconds = 0;
@@ -164,15 +171,14 @@ function swapCells(cell1, cell2) {
   cell2.style.backgroundPosition = imgPos(cell2);
 }
 
-// Timer Code
+// Code for Timer
 function runTimer() {
   // Timer Variables
-  timer = 1;
   const minutesLabel = document.getElementById("minutes");
   const secondsLabel = document.getElementById("seconds");
 
   // Start the timer
-  setInterval(setTime, 1000);
+  timer = setInterval(setTime, 1000);
 
   // Timer Function
   function setTime() {
@@ -190,4 +196,59 @@ function runTimer() {
           return valString;
       }
   }
+}
+function stopTimer() {
+  clearInterval(timer);
+  timer = null;
+}
+
+// Code for Win Condition
+function gameWon() {
+  const cells = document.querySelectorAll('.cell');
+  for (const cell of cells) {
+    const location = `${cell.dataset.row}${cell.dataset.column}`;
+    const imgLocation = cell.dataset.img;
+    if (location != imgLocation) return false;
+  };
+  return true;
+}
+function endGame() {
+  stopTimer();
+  const min = parseInt(totalSeconds / 60);
+  const sec = totalSeconds % 60;
+  const timeTaken = `${min}:${sec}`;
+
+  // Stores time to finish in past times
+  pastTimes.push(timeTaken);
+  displayTimes();
+  totalSeconds = 0;
+}
+function displayTimes() {
+  // Check if the container element already exists
+  let container = document.querySelector('.times');
+  // Create a container element
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'times';
+    document.body.appendChild(container);
+  }
+
+  // Check if the unordered list element already exists
+  let ul = container.querySelector('.times');
+  if (!ul) {
+    // Create a heading element for the title of Past Times List
+    const h2 = document.createElement('h2');
+    h2.textContent = 'Past Times';
+    h2.className = 'times';
+    container.appendChild(h2);
+    // Create an unordered list element
+    ul = document.createElement('ul');
+    ul.className = 'times';
+    container.appendChild(ul);
+  }
+
+  // Add a list item for the most recent addition to the bestTimes array
+  const li = document.createElement('li');
+  li.textContent = pastTimes[pastTimes.length - 1];
+  ul.appendChild(li);
 }
