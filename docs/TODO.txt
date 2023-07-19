@@ -5,10 +5,6 @@ Things to do:
   - Cells must be rearranged in a solvable state
   - Shuffle cells by moving them randomly to the empty cell a certain number of times
   - A function for randomly selecting a neighboring cell to the empty cell may be required
-[Indra]
-- Add win condition
-  - Check for win after a cell swap
-  - May have to add a global variable that deactivates the win condition when shuffling
 [Zian]
 - Add a timer and music
   - Timer from HW may prove useful

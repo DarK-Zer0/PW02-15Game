@@ -1,10 +1,9 @@
+var rows = 4, cols = 4;
 function createBoard () {
     const table = document.querySelector('.board');
 
-    // Creates 4 rows
-    for (let row = 0; row < 4; row++) {
-        // Creates 4 columns
-        for (let col = 0; col < 4; col++) {
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
             // Makes a new div w/ a class: cell
             const cell = document.createElement('div');
             cell.classList.add('cell');
@@ -98,4 +97,32 @@ function shiftCell (cell) {
     const number = cell.textContent;
     emptyCell.textContent = number;
     cell.textContent = '';
+}
+
+// Finds and returns the locations of all the neighbors of the empty cell
+function emptyNeighbor () {
+    let neighbors = ['', '', '', ''];
+    const emptyCell = document.querySelector('[data-empty]');
+    const row = parseInt(emptyCell.dataset.row);
+    const col = parseInt(emptyCell.dataset.column);
+
+    rowMax = rows - 1;
+    colMax = cols - 1;
+    // If empty cell is at an edge, there can't be a neighbor past it
+    if (row == 0) neighbors[0] = null;
+    if (col == 0) neighbors[3] = null;
+    if (row == rowMax) neighbors[2] = null;
+    if (col == colMax) neighbors[1] = null;
+
+    // Stores the valid neighbors in clockwise order
+    const up = row+1, right = col+1, down = row-1, left = col-1;
+    for (let i = 0; i < 4; i++) {
+        if (neighbors[i] == null) continue;
+        if (i == 0) neighbors[i] = `${up}${col}`;
+        if (i == 1) neighbors[i] = `${row}${right}`;
+        if (i == 2) neighbors[i] = `${down}${col}`;
+        if (i == 3) neighbors[i] = `${row}${left}`;
+    }
+
+    return neighbors;
 }
