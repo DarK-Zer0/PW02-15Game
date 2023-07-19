@@ -238,7 +238,7 @@ function displayTimes() {
   if (!ul) {
     // Create a heading element for the title of Past Times List
     const h2 = document.createElement('h2');
-    h2.textContent = 'Past Times';
+    h2.textContent = 'Session Times';
     h2.className = 'times';
     container.appendChild(h2);
     // Create an unordered list element
