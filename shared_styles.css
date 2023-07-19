@@ -247,11 +247,9 @@ pre {
 /* ----------Custom CSS---------- */
 /* Game Board CSS */
 .board {
-    /* Positions board in top-ish center */
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
+	/* Centers the game board horizontally */
+    margin: 0 auto;
+
     /* Sets board to same size as background.jpg */
     width: 400px;
     height: 400px;
@@ -284,19 +282,21 @@ pre {
 }
 
 /* Shuffle Button & Logo CSS */
-.button{
-	
-	margin-top: 10px;
-	display: block;
-	text-align: center;
-	
+.button {
+    margin-top: 10px;
+    display: block;
+    text-align: center;
 }
 
-
-/*timer*/
+/* Timer CSS */
+.timer-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
 #seconds {
-  font-size: 5em;}
-
+  font-size: 5em;
+}
 #minutes {
   font-size: 5em;
 }
