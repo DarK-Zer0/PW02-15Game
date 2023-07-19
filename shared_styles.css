@@ -267,7 +267,8 @@ pre {
 	padding: 0.2em 0.5em;
 }
 
-/* Custom CSS */
+/* ----------Custom CSS---------- */
+/* Game Board CSS */
 .board {
 	/* Positions board in top-ish center */
 	position: absolute;
@@ -304,3 +305,4 @@ pre {
 .cell[data-empty] {
 	background-image: none;
 }
+/* Shuffle Button & Logo CSS */
