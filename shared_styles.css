@@ -8,12 +8,18 @@ a img {
 }
 
 body {
+	display: flex;
+	flex-direction: column;
 	font-family: "Times New Roman", serif;
 	font-size: 12pt;
 	background-color: white;
 	color: black;
 }
-
+.game-header{
+	margin-top: 30px;
+	text-align: center;
+	margin-bottom: 20px;
+}
 .boxed {
 	border: 1px solid black;
 }
@@ -46,38 +52,9 @@ div.sample {
 	padding-right: 50px;
 }
 
-h1 {
-	font-size: 16pt;
-	text-align: center;
-	line-height: 1.1em;
-	padding-bottom: 10px;
-}
 
-h2 {
-	font-size: 14pt;
-}
 
-h3 {
-	font-family: "Arial", sans-serif;
-	font-size: 10pt;
-	margin: 0px;
-	text-align: center;
-}
 
-h4 {
-	font-family: "Arial", sans-serif;
-	font-size: 11pt;
-	margin: 0px;
-	margin-top: 1em;
-	padding: 0px;
-}
-
-h1,h2 {
-	font-family: "Arial", sans-serif;
-	margin-top: 18px;
-	margin-bottom: 0px;
-	clear: both;
-}
 
 .highlighted {
 	background-color: #FFEEEE;
@@ -267,42 +244,61 @@ pre {
 	padding: 0.2em 0.5em;
 }
 
+/* Custom CSS */
+.table {
+	margin:  auto;
+	display: grid;
+	grid-template-columns: repeat(4, 99px);
+}
+
+.button{
+	
+	margin-top: 10px;
+	display: block;
+	text-align: center;
+	
+}
+
+
 /* ----------Custom CSS---------- */
 /* Game Board CSS */
 .board {
-	/* Positions board in top-ish center */
-	position: absolute;
-	top: 10%;
-	left: 50%;
-	transform: translateX(-50%);
-	/* Sets board to same size as background.jpg */
-	width: 400px;
-	height: 400px;
-	/* Makes a new row every 4 cells */
-	display: grid;
-	grid-template-columns: repeat(4, 100px);
-	gap: 0;
+    /* Positions board in top-ish center */
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Sets board to same size as background.jpg */
+    width: 400px;
+    height: 400px;
+    /* Makes a new row every 4 cells */
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 0;
 }
 
 .cell {
-	border: 2px solid black;
-	margin: 0;
-	padding: 0;
-	background-image: url('./img/background.jpg');
-	font-size: 32pt;
-	color: deepskyblue;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    border: 2px solid black;
+	width: 96px;
+	height: 96px;
+    margin: 0;
+    padding: 0;
+    background-image: url('./img/background.jpg');
+    font-size: 32pt;
+    color: deepskyblue;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .cell:not([data-empty]):hover {
-	border-color: red;
-	color: #006600;
-	text-decoration: underline;
-	cursor: pointer;
+    border-color: red;
+    color: #006600;
+    text-decoration: underline;
+    cursor: pointer;
 }
 .cell[data-empty] {
-	background-image: none;
+    background-image: none;
 }
 /* Shuffle Button & Logo CSS */
+
