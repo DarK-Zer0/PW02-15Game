@@ -244,22 +244,6 @@ pre {
 	padding: 0.2em 0.5em;
 }
 
-/* Custom CSS */
-.table {
-	margin:  auto;
-	display: grid;
-	grid-template-columns: repeat(4, 99px);
-}
-
-.button{
-	
-	margin-top: 10px;
-	display: block;
-	text-align: center;
-	
-}
-
-
 /* ----------Custom CSS---------- */
 /* Game Board CSS */
 .board {
@@ -279,8 +263,6 @@ pre {
 
 .cell {
     border: 2px solid black;
-	width: 96px;
-	height: 96px;
     margin: 0;
     padding: 0;
     background-image: url('./img/background.jpg');
@@ -300,5 +282,12 @@ pre {
 .cell[data-empty] {
     background-image: none;
 }
-/* Shuffle Button & Logo CSS */
 
+/* Shuffle Button & Logo CSS */
+.button{
+	
+	margin-top: 10px;
+	display: block;
+	text-align: center;
+	
+}
