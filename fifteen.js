@@ -1,7 +1,8 @@
 // Global Variables
 var rows = 4, cols = 4, 
   totalSeconds = 0, timer = null,
-  pastTimes = [];
+  bestTime = null, leastMoves = null,
+  moves = 0;
 // Code for Game Board
 function createBoard () {
     const table = document.querySelector('.board');
@@ -103,6 +104,7 @@ function shiftCell (cell) {
     cell.textContent = '';
 
     // Check for win condition
+    moves++;
     let gameOver = gameWon();
     if (gameOver && timer) endGame();
 }
@@ -214,45 +216,39 @@ function gameWon() {
 }
 function endGame() {
   stopTimer();
-  const min = parseInt(totalSeconds / 60);
-  const sec = totalSeconds % 60;
-  const timeTaken = `${min}:${sec}`;
 
   // Stores time to finish in past times
-  pastTimes.push(timeTaken);
-  displayTimes();
+  showBest(totalSeconds);
+  // Clears variables for next game
   totalSeconds = 0;
+  moves = 0;
 }
-function displayTimes() {
-  // Check if the container element already exists
-  let container = document.querySelector('.times');
-  // Create a container element
-  if (!container) {
+function secToMins (seconds) {
+  const min = parseInt(seconds / 60);
+  const sec = seconds % 60;
+  return `Time: ${min}:${sec.toString().padStart(2, '0')}`;
+}
+function showBest(secondsTaken) {
+  //const timeTaken = `${min}:${sec}`;
+  if (secondsTaken < bestTime || !bestTime) bestTime = secondsTaken;
+  if (moves < leastMoves || !leastMoves) leastMoves = moves;
+  // Check if the container div already exists
+  let container = document.querySelector('.best');
+  if (!container) { // Container doesn't already exist
+    // Create a container <div>
     container = document.createElement('div');
-    container.className = 'times';
+    container.className = 'best';
     document.body.appendChild(container);
-  }
-  // Check if the header of the list already exists
-  let h2 = container.querySelector('.times');
-  if (!h2) {
-    // Create a heading element for the title of Past Times List
-    h2 = document.createElement('h2');
-    h2.textContent = 'Session Times';
-    h2.className = 'times';
+    // Create a <h2> element
+    const h2 = document.createElement('h2');
+    h2.textContent = 'Session\'s Best';
     container.appendChild(h2);
+    // Create a <p> element
+    const p = document.createElement('p');
+    p.innerHTML = `${secToMins(bestTime)} <br>Moves: ${leastMoves}`;
+    container.appendChild(p);
+  } else { // Container already exists
+    const p = document.querySelector('.best p');
+    p.innerHTML = `${secToMins(bestTime)} <br>Moves: ${leastMoves}`;
   }
-
-  // Check if the unordered list element already exists
-  let ul = container.querySelector('.times');
-  if (!ul) {
-    // Create an unordered list element
-    ul = document.createElement('ul');
-    ul.className = 'times';
-    container.appendChild(ul);
-  }
-
-  // Add a list item for the most recent addition to the bestTimes array
-  const li = document.createElement('li');
-  li.textContent = pastTimes[pastTimes.length - 1];
-  ul.appendChild(li);
 }
