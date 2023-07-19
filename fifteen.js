@@ -104,7 +104,7 @@ function shiftCell (cell) {
 
     // Check for win condition
     let gameOver = gameWon();
-    if (gameOver) endGame();
+    if (gameOver && timer) endGame();
 }
 
 // Code for Shuffle Button
