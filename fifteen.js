@@ -1,5 +1,6 @@
-// Board Global Variables
-var rows = 4, cols = 4;
+// Global Variables
+var rows = 4, cols = 4, 
+  totalSeconds = 0;
 function createBoard () {
     const table = document.querySelector('.board');
 
@@ -141,6 +142,7 @@ function shuffleBoard() {
       emptyCell = randomCell; // Update the reference to the empty cell
     }
   }
+  runTimer();
 }
   
 // Swaps the content of two cells
@@ -163,7 +165,6 @@ function runTimer() {
   // Timer Variables
   const minutesLabel = document.getElementById("minutes");
   const secondsLabel = document.getElementById("seconds");
-  var totalSeconds = 0;
 
   // Start the timer
   setInterval(setTime, 1000);

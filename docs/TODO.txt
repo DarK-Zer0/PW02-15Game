@@ -1,8 +1,5 @@
 Things to do:
 
-[Zian]
-- Add a timer and music
-  - Timer from HW may prove useful
 [Anyone]
 - Add w3 validation to bottom right of page
 - Create functions for repetitive .js code

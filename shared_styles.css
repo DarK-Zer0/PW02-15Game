@@ -126,7 +126,7 @@ p {
 	margin-bottom: 8px;
 	margin-top: 8px;
 	page-break-inside: avoid;
-	text-align: justify;
+	text-align: center;
 }
 
 p.acknowledgement {
@@ -283,7 +283,7 @@ pre {
 
 /* Shuffle Button & Logo CSS */
 .button {
-    margin-top: 10px;
+    margin-top: 15px;
     display: block;
     text-align: center;
 }
