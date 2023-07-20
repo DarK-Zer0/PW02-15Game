@@ -11,6 +11,7 @@ function createBoard () {
             // Makes a new div w/ a class: cell
             const cell = document.createElement('div');
             cell.classList.add('cell');
+			// cell.classList.add('background1');
             // Stores the location of the cell
             cell.setAttribute('data-row',row);
             cell.setAttribute('data-column',col);
@@ -256,3 +257,28 @@ function displayTimes() {
   li.textContent = pastTimes[pastTimes.length - 1];
   ul.appendChild(li);
 }
+
+//
+//	EXPERIMENT With Class Change for Background Change
+//
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const imageSelector = document.getElementById('imageSelector');
+
+  imageSelector.addEventListener('change', function () {
+    const selectedValue = imageSelector.value;
+    const cells = document.querySelectorAll('.cell:not([data-empty])');
+
+    // Loop through all cells and update their background class
+    cells.forEach(cell => {
+      // Remove existing background class
+      cell.classList.remove('background1', 'background2', 'background3', 'background4', 'background5');
+
+      // Add the selected background class
+      cell.classList.add(selectedValue);
+	  
+    });
+  });
+});
+

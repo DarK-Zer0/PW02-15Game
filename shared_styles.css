@@ -259,11 +259,31 @@ pre {
     gap: 0;
 }
 
+
+/* Classes to modify background */
+.background1 {
+    background-image: url('./img/background.jpg');
+}
+.background2 {
+    background-image: url('./img/background2.png');
+}
+.background3 {
+    background-image: url('./img/background3.png');
+}
+.background4 {
+    background-image: url('./img/background4.png');
+}
+.background5 {
+    background-image: url('./img/background5.png');
+}
+
+
+
 .cell {
     border: 2px solid black;
     margin: 0;
     padding: 0;
-    background-image: url('./img/background.jpg');
+    /* background-image: url('./img/background.jpg'); */
     font-size: 32pt;
     color: deepskyblue;
     text-align: center;
@@ -271,6 +291,7 @@ pre {
     justify-content: center;
     align-items: center;
 }
+
 .cell:not([data-empty]):hover {
     border-color: red;
     color: #006600;
