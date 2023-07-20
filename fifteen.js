@@ -6,7 +6,7 @@ var rows = 4, cols = 4,
   // move tracking
   leastMoves = null, moves = 0,
   // default background
-  background = 'background1';
+  background = 'background1',
   // Array of background classes
   backgrounds = ['background1', 'background2', 'background3', 'background4', 'background5'];
 
