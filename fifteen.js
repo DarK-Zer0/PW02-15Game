@@ -255,7 +255,6 @@ function secToMins (seconds) {
   return `Time: ${min}:${sec.toString().padStart(2, '0')}`;
 }
 function showBest(secondsTaken) {
-  //const timeTaken = `${min}:${sec}`;
   if (secondsTaken < bestTime || !bestTime) bestTime = secondsTaken;
   if (moves < leastMoves || !leastMoves) leastMoves = moves;
   // Check if the container div already exists
