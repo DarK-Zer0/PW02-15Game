@@ -40,17 +40,21 @@
 					<button onclick="shuffleBoard()">Shuffle</button>
 				</div>
 				
-
-				<!-- Background Image Options -->
-				<select id="imageSelector">
-					<option value="background1">Class 1</option>
-					<option value="background2">Class 2</option>
-					<option value="background3">Class 3</option>
-					<option value="background4">Class 4</option>
-					<option value="background5">Class 5</option>
-				</select>
-			
-			</div>
+        <!-- Background Image Options -->
+        <select id="imageSelector">
+            <option value="background1">Bowser</option>
+            <option value="background2">Bombette</option>
+            <option value="background3">Goombella</option>
+            <option value="background4">Parakarry</option>
+            <option value="background5">Piranha Plant</option>
+        </select>
+        
+        <!-- Game Board and Shuffle Button-->
+        <div class="board"></div>
+        <div class="button">
+            <button onclick="shuffleBoard()">Shuffle</button>
+        </div>
+        <script>createBoard();</script>
 
 			<!-- Timer Feature -->
 			<div class="timer-container">
