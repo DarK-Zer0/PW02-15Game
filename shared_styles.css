@@ -252,6 +252,7 @@ pre {
     /* Sets board to same size as background.jpg */
     width: 400px;
     height: 400px;
+    font-size: 32pt;
     /* Makes a new row every 4 cells */
     display: grid;
     grid-template-columns: repeat(4, 100px);
@@ -263,7 +264,6 @@ pre {
     margin: 0;
     padding: 0;
     background-image: url('./img/background.jpg');
-    font-size: 32pt;
     color: deepskyblue;
     text-align: center;
     display: flex;

@@ -3,43 +3,68 @@ var rows = 4, cols = 4,
   totalSeconds = 0, timer = null,
   bestTime = null, leastMoves = null,
   moves = 0;
+
+function loadOptions () {
+  // Options to Set Grid Size
+  const select = document.createElement('select');
+
+  // Create option elements for each grid size
+  const gridSizes = [4, 3, 6, 8, 10];
+  gridSizes.forEach(size => {
+    const option = document.createElement('option');
+    option.value = size;
+    option.textContent = `${size}x${size}`;
+    select.appendChild(option);
+  });
+
+  // Add event listener to call setGrid with selected grid size
+  select.addEventListener('change', event => {
+    const gridSize = parseInt(event.target.value);
+    setGrid(gridSize);
+  });
+
+  // Add select element to .options div
+  const optionsDiv = document.querySelector('.options');
+  optionsDiv.appendChild(select);
+}
+
 // Code for Game Board
 function createBoard () {
-    const table = document.querySelector('.board');
+  const table = document.querySelector('.board');
 
-    for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-            // Makes a new div w/ a class: cell
-            const cell = document.createElement('div');
-            cell.classList.add('cell');
-            // Stores the location of the cell
-            cell.setAttribute('data-row',row);
-            cell.setAttribute('data-column',col);
-            if (row == 3 && col == 3) { // Adds cell 16 to the board and makes it empty
-                cell.setAttribute('data-empty','1');
-                table.appendChild(cell);
-            } else { // Adds cells 1-15 to the board
-                // Gives each cell a number to display over themself
-                const number = document.createTextNode(row * 4 + col + 1);
-                cell.appendChild(number);
-                table.appendChild(cell);
-            }
-            // Adds an event listener to the cell that calls the swapCell function when clicked
-            cell.addEventListener('click', () => {
-                shiftCell(cell);
-            });
-        }
-    }
+  for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+          // Makes a new div w/ a class: cell
+          const cell = document.createElement('div');
+          cell.classList.add('cell');
+          // Stores the location of the cell
+          cell.setAttribute('data-row',row);
+          cell.setAttribute('data-column',col);
+          if (row == rows-1 && col == cols-1) { // Adds cell 16 to the board and makes it empty
+              cell.setAttribute('data-empty','1');
+              table.appendChild(cell);
+          } else { // Adds cells 1-15 to the board
+              // Gives each cell a number to display over themself
+              const number = document.createTextNode(row * cols + col + 1);
+              cell.appendChild(number);
+              table.appendChild(cell);
+          }
+          // Adds an event listener to the cell that calls the swapCell function when clicked
+          cell.addEventListener('click', () => {
+              shiftCell(cell);
+          });
+      }
+  }
 
-    // Gathers all cells w/ data-row & data-column attributes
-    const cells = document.querySelectorAll('[data-row][data-column]');
-    cells.forEach(cell => {
-        const row = cell.dataset.row;
-        const col = cell.dataset.column;
-        // Sets the portion of the image the selected cell will contain by default
-        cell.setAttribute('data-img',`${row}${col}`);
-        loadImg(cell);
-    });
+  // Gathers all cells w/ data-row & data-column attributes
+  const cells = document.querySelectorAll('[data-row][data-column]');
+  cells.forEach(cell => {
+      const row = cell.dataset.row;
+      const col = cell.dataset.column;
+      // Sets the portion of the image the selected cell will contain by default
+      cell.setAttribute('data-img',`${row}${col}`);
+      loadImg(cell);
+  });
 }
 
 // Retrieves the section of the image a cell should hold based on its stored data-img attribute
@@ -47,8 +72,8 @@ function imgPos (cell) {
     let imgData = cell.getAttribute('data-img');
     let col = parseInt(imgData[0]);
     let row = parseInt(imgData[1]);
-    let x = row * -100;
-    let y = col * -100;
+    let x = row * (-400 / rows);
+    let y = col * (-400 / cols);
 
     return `${x}px ${y}px`;
 }
@@ -254,10 +279,30 @@ function showBest(secondsTaken) {
 }
 
 // Code for Different Puzzle Sizes
-function setGrid(choice) { // choice = cell rows and columns
-  const cellWidth = parseInt(400 / choice); 
+function setGrid(choice) { // choice = # of rows and columns
+  const cellWidth = parseInt(400 / choice);
+  rows = choice;
+  cols = choice;
+  // Removes the old grid size
+  const existingStyles = document.querySelectorAll('style');
+  existingStyles.forEach(style => {
+    if (style.textContent.includes('.board')) {
+      style.remove();
+    }
+  });
+  // Removes the old board
+  const board = document.querySelector('div.board');
+  board.innerHTML = '';
+  createBoard();
+  // Sets the new grid size
   const style = document.createElement('style');
-  style.textContent = `.board { grid-template-columns: repeat(${choice}, ${cellWidth}px); }`;
+  if (choice > 8) {
+    style.textContent = `.board { grid-template-columns: repeat(${choice}, ${cellWidth}px); font-size: 22pt; }`;
+  } else if (choice > 6) {
+    style.textContent = `.board { grid-template-columns: repeat(${choice}, ${cellWidth}px); font-size: 24pt; }`;
+  } else {
+    style.textContent = `.board { grid-template-columns: repeat(${choice}, ${cellWidth}px); }`;
+  }
   document.head.appendChild(style);
 }
 
