@@ -11,6 +11,7 @@ var rows = 4, cols = 4,
 function loadGrid () {
   // Options to Set Grid Size
   const select = document.createElement('select');
+  select.id = 'gridSelector';
 
   // Create option elements for each grid size; default = 4x4
   const gridSizes = [4, 3, 6, 8, 10];
