@@ -1,45 +1,71 @@
 // Global Variables
 var rows = 4, cols = 4, 
   totalSeconds = 0, timer = null,
-  pastTimes = [];
+  bestTime = null, leastMoves = null,
+  moves = 0;
+
+function loadGrid () {
+  // Options to Set Grid Size
+  const select = document.createElement('select');
+
+  // Create option elements for each grid size
+  const gridSizes = [4, 3, 6, 8, 10];
+  gridSizes.forEach(size => {
+    const option = document.createElement('option');
+    option.value = size;
+    option.textContent = `${size}x${size}`;
+    select.appendChild(option);
+  });
+
+  // Add event listener to call setGrid with selected grid size
+  select.addEventListener('change', event => {
+    const gridSize = parseInt(event.target.value);
+    setGrid(gridSize);
+  });
+
+  // Add select element to .gridSize div
+  const optionsDiv = document.querySelector('.gridSize');
+  optionsDiv.appendChild(select);
+}
+
 // Code for Game Board
 function createBoard () {
-    const table = document.querySelector('.board');
+  const table = document.querySelector('.board');
 
-    for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-            // Makes a new div w/ a class: cell
-            const cell = document.createElement('div');
-            cell.classList.add('cell');
+  for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+          // Makes a new div w/ a class: cell
+          const cell = document.createElement('div');
+          cell.classList.add('cell');
 			// cell.classList.add('background1');
-            // Stores the location of the cell
-            cell.setAttribute('data-row',row);
-            cell.setAttribute('data-column',col);
-            if (row == 3 && col == 3) { // Adds cell 16 to the board and makes it empty
-                cell.setAttribute('data-empty','1');
-                table.appendChild(cell);
-            } else { // Adds cells 1-15 to the board
-                // Gives each cell a number to display over themself
-                const number = document.createTextNode(row * 4 + col + 1);
-                cell.appendChild(number);
-                table.appendChild(cell);
-            }
-            // Adds an event listener to the cell that calls the swapCell function when clicked
-            cell.addEventListener('click', () => {
-                shiftCell(cell);
-            });
-        }
-    }
+          // Stores the location of the cell
+          cell.setAttribute('data-row',row);
+          cell.setAttribute('data-column',col);
+          if (row == rows-1 && col == cols-1) { // Adds cell 16 to the board and makes it empty
+              cell.setAttribute('data-empty','1');
+              table.appendChild(cell);
+          } else { // Adds cells 1-15 to the board
+              // Gives each cell a number to display over themself
+              const number = document.createTextNode(row * cols + col + 1);
+              cell.appendChild(number);
+              table.appendChild(cell);
+          }
+          // Adds an event listener to the cell that calls the swapCell function when clicked
+          cell.addEventListener('click', () => {
+              shiftCell(cell);
+          });
+      }
+  }
 
-    // Gathers all cells w/ data-row & data-column attributes
-    const cells = document.querySelectorAll('[data-row][data-column]');
-    cells.forEach(cell => {
-        const row = cell.dataset.row;
-        const col = cell.dataset.column;
-        // Sets the portion of the image the selected cell will contain by default
-        cell.setAttribute('data-img',`${row}${col}`);
-        loadImg(cell);
-    });
+  // Gathers all cells w/ data-row & data-column attributes
+  const cells = document.querySelectorAll('[data-row][data-column]');
+  cells.forEach(cell => {
+      const row = cell.dataset.row;
+      const col = cell.dataset.column;
+      // Sets the portion of the image the selected cell will contain by default
+      cell.setAttribute('data-img',`${row}${col}`);
+      loadImg(cell);
+  });
 }
 
 // Retrieves the section of the image a cell should hold based on its stored data-img attribute
@@ -47,8 +73,8 @@ function imgPos (cell) {
     let imgData = cell.getAttribute('data-img');
     let col = parseInt(imgData[0]);
     let row = parseInt(imgData[1]);
-    let x = row * -100;
-    let y = col * -100;
+    let x = row * (-400 / rows);
+    let y = col * (-400 / cols);
 
     return `${x}px ${y}px`;
 }
@@ -104,6 +130,7 @@ function shiftCell (cell) {
     cell.textContent = '';
 
     // Check for win condition
+    moves++;
     let gameOver = gameWon();
     if (gameOver && timer) endGame();
 }
@@ -203,7 +230,7 @@ function stopTimer() {
   timer = null;
 }
 
-// Code for Win Condition
+// Code for Game Time
 function gameWon() {
   const cells = document.querySelectorAll('.cell');
   for (const cell of cells) {
@@ -215,49 +242,72 @@ function gameWon() {
 }
 function endGame() {
   stopTimer();
-  const min = parseInt(totalSeconds / 60);
-  const sec = totalSeconds % 60;
-  const timeTaken = `${min}:${sec}`;
 
   // Stores time to finish in past times
-  pastTimes.push(timeTaken);
-  displayTimes();
+  showBest(totalSeconds);
+  // Clears variables for next game
   totalSeconds = 0;
+  moves = 0;
 }
-function displayTimes() {
-  // Check if the container element already exists
-  let container = document.querySelector('.times');
-  // Create a container element
-  if (!container) {
+function secToMins (seconds) {
+  const min = parseInt(seconds / 60);
+  const sec = seconds % 60;
+  return `Time: ${min}:${sec.toString().padStart(2, '0')}`;
+}
+function showBest(secondsTaken) {
+  //const timeTaken = `${min}:${sec}`;
+  if (secondsTaken < bestTime || !bestTime) bestTime = secondsTaken;
+  if (moves < leastMoves || !leastMoves) leastMoves = moves;
+  // Check if the container div already exists
+  let container = document.querySelector('.best');
+  if (!container) { // Container doesn't already exist
+    // Create a container <div>
     container = document.createElement('div');
-    container.className = 'times';
+    container.className = 'best';
     document.body.appendChild(container);
-  }
-  // Check if the header of the list already exists
-  let h2 = container.querySelector('.times');
-  if (!h2) {
-    // Create a heading element for the title of Past Times List
-    h2 = document.createElement('h2');
-    h2.textContent = 'Session Times';
-    h2.className = 'times';
+    // Create a <h2> element
+    const h2 = document.createElement('h2');
+    h2.textContent = 'Session\'s Best';
     container.appendChild(h2);
+    // Create a <p> element
+    const p = document.createElement('p');
+    p.innerHTML = `${secToMins(bestTime)} <br>Moves: ${leastMoves}`;
+    container.appendChild(p);
+  } else { // Container already exists
+    const p = document.querySelector('.best p');
+    p.innerHTML = `${secToMins(bestTime)} <br>Moves: ${leastMoves}`;
   }
-
-  // Check if the unordered list element already exists
-  let ul = container.querySelector('.times');
-  if (!ul) {
-    // Create an unordered list element
-    ul = document.createElement('ul');
-    ul.className = 'times';
-    container.appendChild(ul);
-  }
-
-  // Add a list item for the most recent addition to the bestTimes array
-  const li = document.createElement('li');
-  li.textContent = pastTimes[pastTimes.length - 1];
-  ul.appendChild(li);
 }
 
+// Code for Different Puzzle Sizes
+function setGrid(choice) { // choice = # of rows and columns
+  const cellWidth = parseInt(400 / choice);
+  rows = choice;
+  cols = choice;
+  // Removes the old grid size
+  const existingStyles = document.querySelectorAll('style');
+  existingStyles.forEach(style => {
+    if (style.textContent.includes('.board')) {
+      style.remove();
+    }
+  });
+  // Removes the old board
+  const board = document.querySelector('div.board');
+  board.innerHTML = '';
+  createBoard();
+  // Sets the new grid size
+  const style = document.createElement('style');
+  if (choice > 8) {
+    style.textContent = `.board { grid-template-columns: repeat(${choice}, ${cellWidth}px); font-size: 22pt; }`;
+  } else if (choice > 6) {
+    style.textContent = `.board { grid-template-columns: repeat(${choice}, ${cellWidth}px); font-size: 24pt; }`;
+  } else {
+    style.textContent = `.board { grid-template-columns: repeat(${choice}, ${cellWidth}px); }`;
+  }
+  document.head.appendChild(style);
+}
+
+// Code for Different Background Images
 //
 //	EXPERIMENT With Class Change for Background Change
 //

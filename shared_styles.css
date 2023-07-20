@@ -123,8 +123,8 @@ li.horizontal {
 }
 
 p {
-	margin-bottom: 8px;
-	margin-top: 8px;
+	margin-bottom: 2px;
+	margin-top: 2px;
 	page-break-inside: avoid;
 	text-align: center;
 }
@@ -249,10 +249,10 @@ pre {
 .board {
 	/* Centers the game board horizontally */
     margin: 0 auto;
-
     /* Sets board to same size as background.jpg */
     width: 400px;
     height: 400px;
+    font-size: 32pt;
     /* Makes a new row every 4 cells */
     display: grid;
     grid-template-columns: repeat(4, 100px);
@@ -284,7 +284,6 @@ pre {
     margin: 0;
     padding: 0;
     /* background-image: url('./img/background.jpg'); */
-    font-size: 32pt;
     color: deepskyblue;
     text-align: center;
     display: flex;
@@ -314,34 +313,26 @@ pre {
     display: flex;
     justify-content: center;
     margin-top: 10px;
-}
-#seconds {
-  font-size: 5em;
-}
-#minutes {
-  font-size: 5em;
-}
-#colon {
-  font-size: 5em;
+	font-size: 4em;
 }
 
 /* Best Times CSS */
-div .times {
+div.best {
 	max-height: 300px;
-	width: 120px;
-	overflow: auto;
+	width: 155px;
 }
-.times {
+.best {
 	position: absolute;
 	top: 50%;
 	left: 0;
 	transform: translateY(-50%);
 }
-.times h2 {
+.best h2 {
 	font-size: 24pt;
 	text-align: center;
+	text-decoration: underline;
 }
-.times ul {
+.best p {
 	font-size: 22pt;
 }
 
