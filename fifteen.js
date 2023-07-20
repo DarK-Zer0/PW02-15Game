@@ -1,50 +1,21 @@
 // -----GLOBAL VARIABLES-----
 // default grid size
-var rows = 4, cols = 4, 
+var rows = 4, cols = 4, gridSetting = 'default',
   // time tracking
   totalSeconds = 0, timer = null, bestTime = null, 
   // move tracking
   leastMoves = null, moves = 0,
   // default background
-  background = 'background1',
+  background, bgSetting = 'default',
   // Array of background classes
   backgrounds = ['background1', 'background2', 'background3', 'background4', 'background5'];
 
-function loadGrid () {
-  // Options to Set Grid Size
-  const select = document.createElement('select');
-  select.id = 'gridSize';
-
-  // Create option elements for each grid size; default = 4x4
-  const gridSizes = [4, 3, 6, 8, 10];
-  gridSizes.forEach(size => {
-    const option = document.createElement('option');
-    option.value = size;
-    option.textContent = `${size}x${size}`;
-    select.appendChild(option);
-  });
-
-  // Add event listener to call setGrid with selected grid size
-  select.addEventListener('change', event => {
-    const gridSize = parseInt(event.target.value);
-    setGrid(gridSize);
-  });
-
-  // Add select element to .gridSize div
-  const optionsDiv = document.querySelector('.gridSize');
-  optionsDiv.appendChild(select);
-}
-
 // -----CODE: GAME BOARD-----
-// Randomizes the background variable referencing the backgrounds array
-function randomBackground()	{
-	background = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-	return background;
-}
-function createBoard () {
-
-  // Calling the random background function.
-  background = randomBackground();
+function createBoard() {
+  // Randomizes the background image chosen on start
+  if (bgSetting == 'default') {
+    randomBackground();
+  }
 
   const table = document.querySelector('.board');
 
@@ -86,7 +57,7 @@ function createBoard () {
 }
 
 // Retrieves the section of the image a cell should hold based on its stored data-img attribute
-function imgPos (cell) {
+function imgPos(cell) {
     let imgData = cell.getAttribute('data-img');
     let col = parseInt(imgData[0]);
     let row = parseInt(imgData[1]);
@@ -96,12 +67,12 @@ function imgPos (cell) {
     return `${x}px ${y}px`;
 }
 // Loads the image section based on the stored data-img
-function loadImg (cell) {
+function loadImg(cell) {
     cell.style.backgroundPosition = imgPos(cell);
 }
 
 // Detects if a neighbor cell is the empty cell and returns a string containing the position of empty cell if true 
-function nearEmpty (cell) {
+function nearEmpty(cell) {
     const emptyCell = document.querySelector('[data-empty]');
     const emptyRow = parseInt(emptyCell.dataset.row);
     const emptyCol = parseInt(emptyCell.dataset.column);
@@ -123,7 +94,7 @@ function nearEmpty (cell) {
     return `${emptyRow}${emptyCol}`;
 }
 // Shifts a non-empty cell to the location of the empty cell
-function shiftCell (cell) {
+function shiftCell(cell) {
     const emptyPos = nearEmpty(cell);
     if (emptyPos == null) { // Does nothing if empty cell is not found adjacent to non-empty cell
         return;
@@ -247,7 +218,7 @@ function stopTimer() {
   timer = null;
 }
 
-// -----CODE: GAME TIME-----
+// -----CODE: WINNING THE GAME-----
 function gameWon() {
   const cells = document.querySelectorAll('.cell');
   for (const cell of cells) {
@@ -266,7 +237,7 @@ function endGame() {
   totalSeconds = 0;
   moves = 0;
 }
-function secToMins (seconds) {
+function secToMins(seconds) {
   const min = parseInt(seconds / 60);
   const sec = seconds % 60;
   return `Time: ${min}:${sec.toString().padStart(2, '0')}`;
@@ -296,6 +267,31 @@ function showBest(secondsTaken) {
 }
 
 // -----CODE: CHANGEABLE GRID SIZES-----
+function loadGrid() {
+  // Options to Set Grid Size
+  const select = document.createElement('select');
+  select.id = 'gridSize';
+
+  // Create option elements for each grid size; default = 4x4
+  const gridSizes = [3, 4, 6, 8, 10];
+  gridSizes.forEach(size => {
+    const option = document.createElement('option');
+    option.value = size;
+    option.textContent = `${size}x${size}`;
+    select.appendChild(option);
+  });
+  select.selectedIndex = 1;
+
+  // Add event listener to call setGrid with selected grid size
+  select.addEventListener('change', event => {
+    const gridSize = parseInt(event.target.value);
+    setGrid(gridSize);
+  });
+
+  // Add select element to .gridSize div
+  const optionsDiv = document.querySelector('.gridSize');
+  optionsDiv.appendChild(select);
+}
 function setGrid(choice) { // choice = # of rows and columns
   const cellWidth = parseInt(400 / choice);
   rows = choice;
@@ -324,12 +320,21 @@ function setGrid(choice) { // choice = # of rows and columns
 }
 
 // -----CODE: CHANGEABLE BACKGROUNDS-----
+// Randomizes the background variable referencing the backgrounds array
+function randomBackground()	{
+	background = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+  imgSel = document.querySelector('div.buttonRow select#imageSelector');
+  const index = parseInt(background.substring('background'.length))-1;
+  imgSel.selectedIndex = index;
+}
+// Sets the background-image for all cells
 document.addEventListener('DOMContentLoaded', function () {
   const imageSelector = document.getElementById('imageSelector');
 
   imageSelector.addEventListener('change', function () {
     const selectedValue = imageSelector.value;
     background = selectedValue;
+    bgSetting = 'custom';
     const cells = document.querySelectorAll('.cell');
 
     // Loop through all cells and update their background class

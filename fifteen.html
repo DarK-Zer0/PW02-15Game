@@ -12,49 +12,35 @@
         <h2 class="game-header"> <img src="./img/sliding-puzzle.png"></h2>
 
         <!-- Intro -->
-		
 		<div class="rules-container">
 			<div class="rules">
-			
 				<p>The goal of the fifteen puzzle is to un-jumble its fifteen squares by repeatedly making moves that slide squares<br>
 				into the empty space. How quickly can you solve it? Click Shuffle to begin!</p>
 			</div>
 		</div>
 		
 		<div class="gameBox">
-		
 			<!-- Initial Load -->
-			<script>loadGrid();</script>
 			<div class="board"></div>
-			<script>createBoard();</script>
 			
 			<div class="buttonRow">
-			
 				<!-- Grid Size Options -->
 				<div class="gridSize"></div>
-				<script>loadGrid();</script>
 
-				
-				<!-- Game Board and Shuffle Button-->
+				<!-- Shuffle Button-->
 				<div id="button">
 					<button onclick="shuffleBoard()">Shuffle</button>
 				</div>
 				
-        <!-- Background Image Options -->
-        <select id="imageSelector">
-            <option value="background1">Bowser</option>
-            <option value="background2">Bombette</option>
-            <option value="background3">Goombella</option>
-            <option value="background4">Parakarry</option>
-            <option value="background5">Piranha Plant</option>
-        </select>
-        
-        <!-- Game Board and Shuffle Button-->
-        <div class="board"></div>
-        <div class="button">
-            <button onclick="shuffleBoard()">Shuffle</button>
-        </div>
-        <script>createBoard();</script>
+                <!-- Background Image Options -->
+                <select id="imageSelector">
+                    <option value="background1">Bowser</option>
+                    <option value="background2">Bombette</option>
+                    <option value="background3">Goombella</option>
+                    <option value="background4">Parakarry</option>
+                    <option value="background5">Piranha Plant</option>
+                </select>
+            </div>
 
 			<!-- Timer Feature -->
 			<div class="timer-container">
@@ -65,7 +51,10 @@
 
 			<!-- Game Song -->
 			<audio controls autoplay loop src="game_song.mp3"></audio>
-			
+
+            <!-- Javascript Functions -->
+			<script>createBoard();</script>
+            <script>loadGrid();</script>
 		</div>
 			
     </body>
