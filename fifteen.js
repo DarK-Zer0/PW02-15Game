@@ -326,9 +326,6 @@ function setGrid(choice) { // choice = # of rows and columns
 }
 
 // Code for Different Background Images
-//
-
-
 document.addEventListener('DOMContentLoaded', function () {
   const imageSelector = document.getElementById('imageSelector');
 
