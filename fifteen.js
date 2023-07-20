@@ -6,7 +6,7 @@ var rows = 4, cols = 4,
   // move tracking
   leastMoves = null, moves = 0,
   // default background
-  background = 'background1';
+  background = 'background1',
   // Array of background classes
   backgrounds = ['background1', 'background2', 'background3', 'background4', 'background5'];
 
@@ -20,8 +20,9 @@ function randomBackground()	{
 function loadGrid () {
   // Options to Set Grid Size
   const select = document.createElement('select');
+  select.id = 'gridSize';
 
-  // Create option elements for each grid size
+  // Create option elements for each grid size; default = 4x4
   const gridSizes = [4, 3, 6, 8, 10];
   gridSizes.forEach(size => {
     const option = document.createElement('option');
