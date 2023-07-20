@@ -4,7 +4,7 @@ var rows = 4, cols = 4,
   bestTime = null, leastMoves = null,
   moves = 0;
 
-function loadOptions () {
+function loadGrid () {
   // Options to Set Grid Size
   const select = document.createElement('select');
 
@@ -23,8 +23,8 @@ function loadOptions () {
     setGrid(gridSize);
   });
 
-  // Add select element to .options div
-  const optionsDiv = document.querySelector('.options');
+  // Add select element to .gridSize div
+  const optionsDiv = document.querySelector('.gridSize');
   optionsDiv.appendChild(select);
 }
 
