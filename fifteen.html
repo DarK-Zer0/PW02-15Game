@@ -12,13 +12,34 @@
         <h2 class="game-header"> <img src="./img/sliding-puzzle.png"></h2>
 
         <!-- Intro -->
-        <p>The goal of the fifteen puzzle is to un-jumble its fifteen squares by repeatedly making moves that slide squares<br>
-        into the empty space. How quickly can you solve it? Click Shuffle to begin!</p>
+		
+		<div class="rules-container">
+			<div class="rules">
+			
+				<p>The goal of the fifteen puzzle is to un-jumble its fifteen squares by repeatedly making moves that slide squares<br>
+				into the empty space. How quickly can you solve it? Click Shuffle to begin!</p>
+			</div>
+		</div>
+		
+		<div class="gameBox">
+		
+			<!-- Initial Load -->
+			<script>loadGrid();</script>
+			<div class="board"></div>
+			<script>createBoard();</script>
+			
+			<div class="buttonRow">
+			
+				<!-- Grid Size Options -->
+				<div class="gridSize"></div>
+				<script>loadGrid();</script>
 
-        <!-- Grid Size Options -->
-        <div class="gridSize"></div>
-        <script>loadGrid();</script>
-
+				
+				<!-- Game Board and Shuffle Button-->
+				<div id="button">
+					<button onclick="shuffleBoard()">Shuffle</button>
+				</div>
+				
         <!-- Background Image Options -->
         <select id="imageSelector">
             <option value="background1">Bowser</option>
@@ -35,14 +56,17 @@
         </div>
         <script>createBoard();</script>
 
-        <!-- Timer Feature -->
-        <div class="timer-container">
-            <label id="minutes">00</label>
-            <label id="colon">:</label>
-            <label id="seconds">00</label>
-        </div>
+			<!-- Timer Feature -->
+			<div class="timer-container">
+				<label id="minutes">00</label>
+				<label id="colon">:</label>
+				<label id="seconds">00</label>
+			</div>
 
-        <!-- Game Song -->
-        <audio controls autoplay loop src="game_song.mp3"></audio>
+			<!-- Game Song -->
+			<audio controls autoplay loop src="game_song.mp3"></audio>
+			
+		</div>
+			
     </body>
 </html>

@@ -52,10 +52,6 @@ div.sample {
 	padding-right: 50px;
 }
 
-
-
-
-
 .highlighted {
 	background-color: #FFEEEE;
 	/*
@@ -283,7 +279,6 @@ pre {
     border: 2px solid black;
     margin: 0;
     padding: 0;
-    /* background-image: url('./img/background.jpg'); */
     color: deepskyblue;
     text-align: center;
     display: flex;
@@ -301,12 +296,69 @@ pre {
     background-image: none;
 }
 
-/* Shuffle Button & Logo CSS */
-.button {
-    margin-top: 15px;
-    display: block;
-    text-align: center;
+/* The box containing the board and the buttons and music.   */
+.gameBox {
+	background-color: red;
+	border: 2px solid black;
+	border-radius: 10px;
+	padding: 5px 10px;
+	width: max-content;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0 auto;
+	margin-top: 20px;
 }
+
+/* Styling for the rules over the gameboard */
+.rules-container {
+	display: flex;
+    justify-content: center;
+	align-items: center;
+}
+
+.rules {
+	width: max-content;
+	color: black;
+	background-color: #f2f2f2;
+	border: 2px solid #cccccc;
+	border-radius: 10px;
+	padding: 5px 10px;
+}
+
+
+/* Arranging the buttons in a row */
+.buttonRow {
+    display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 5px 10px;
+	align-items: center;
+	width: 85%;
+}
+	
+	
+/* Shuffle Button & Logo CSS */
+
+#button  button, #imageSelector, #gridSize {
+	color: black;
+	background-color: #f2f2f2;
+	border: 2px solid #cccccc;
+	border-radius: 10px;
+	padding: 5px 10px;
+	width: max-content;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	display: flex;
+    justify-content: center;
+}
+
+/* Ensure the empty cell is white */
+.cell[data-empty] {
+    background-color: white;
+}
+
+
 
 /* Timer CSS */
 .timer-container {
@@ -314,6 +366,7 @@ pre {
     justify-content: center;
     margin-top: 10px;
 	font-size: 4em;
+	margin-bottom: 20p;
 }
 
 /* Best Times CSS */
