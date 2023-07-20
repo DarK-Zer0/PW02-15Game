@@ -1,8 +1,11 @@
 // Global Variables
+// default grid size
 var rows = 4, cols = 4, 
-  totalSeconds = 0, timer = null,
-  bestTime = null, leastMoves = null,
-  moves = 0,
+  // time tracking
+  totalSeconds = 0, timer = null, bestTime = null, 
+  // move tracking
+  leastMoves = null, moves = 0,
+  // default background
   background = 'background1';
 
 function loadGrid () {
