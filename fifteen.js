@@ -1,4 +1,4 @@
-// Global Variables
+// -----GLOBAL VARIABLES-----
 // default grid size
 var rows = 4, cols = 4, 
   // time tracking
@@ -10,13 +10,6 @@ var rows = 4, cols = 4,
   // Array of background classes
   backgrounds = ['background1', 'background2', 'background3', 'background4', 'background5'];
 
-// Randomizes the background variable referencing the backgrounds array
-function randomBackground()	{
-	background = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-	return background;
-}
-  
-  
 function loadGrid () {
   // Options to Set Grid Size
   const select = document.createElement('select');
@@ -42,7 +35,12 @@ function loadGrid () {
   optionsDiv.appendChild(select);
 }
 
-// Code for Game Board
+// -----CODE: GAME BOARD-----
+// Randomizes the background variable referencing the backgrounds array
+function randomBackground()	{
+	background = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+	return background;
+}
 function createBoard () {
 
   // Calling the random background function.
@@ -154,7 +152,7 @@ function shiftCell (cell) {
     if (gameOver && timer) endGame();
 }
 
-// Code for Shuffle Button
+// -----CODE: SHUFFLE-----
 function shuffleBoard() {
   const cells = document.querySelectorAll('.cell:not([data-empty])');
 
@@ -218,7 +216,7 @@ function swapCells(cell1, cell2) {
   cell2.style.backgroundPosition = imgPos(cell2);
 }
 
-// Code for Timer
+// -----CODE: TIMER-----
 function runTimer() {
   // Timer Variables
   const minutesLabel = document.getElementById("minutes");
@@ -249,7 +247,7 @@ function stopTimer() {
   timer = null;
 }
 
-// Code for Game Time
+// -----CODE: GAME TIME-----
 function gameWon() {
   const cells = document.querySelectorAll('.cell');
   for (const cell of cells) {
@@ -297,7 +295,7 @@ function showBest(secondsTaken) {
   }
 }
 
-// Code for Different Puzzle Sizes
+// -----CODE: CHANGEABLE GRID SIZES-----
 function setGrid(choice) { // choice = # of rows and columns
   const cellWidth = parseInt(400 / choice);
   rows = choice;
@@ -325,7 +323,7 @@ function setGrid(choice) { // choice = # of rows and columns
   document.head.appendChild(style);
 }
 
-// Code for Different Background Images
+// -----CODE: CHANGEABLE BACKGROUNDS-----
 document.addEventListener('DOMContentLoaded', function () {
   const imageSelector = document.getElementById('imageSelector');
 
