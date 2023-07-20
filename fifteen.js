@@ -7,7 +7,16 @@ var rows = 4, cols = 4,
   leastMoves = null, moves = 0,
   // default background
   background = 'background1';
+  // Array of background classes
+  backgrounds = ['background1', 'background2', 'background3', 'background4', 'background5'];
 
+// Randomizes the background variable referencing the backgrounds array
+function randomBackground()	{
+	background = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+	return background;
+}
+  
+  
 function loadGrid () {
   // Options to Set Grid Size
   const select = document.createElement('select');
@@ -34,6 +43,10 @@ function loadGrid () {
 
 // Code for Game Board
 function createBoard () {
+
+  // Calling the random background function.
+  background = randomBackground();
+
   const table = document.querySelector('.board');
 
   for (let row = 0; row < rows; row++) {
@@ -312,8 +325,6 @@ function setGrid(choice) { // choice = # of rows and columns
 }
 
 // Code for Different Background Images
-//
-//	EXPERIMENT With Class Change for Background Change
 //
 
 
