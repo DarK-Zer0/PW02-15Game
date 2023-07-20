@@ -2,7 +2,8 @@
 var rows = 4, cols = 4, 
   totalSeconds = 0, timer = null,
   bestTime = null, leastMoves = null,
-  moves = 0;
+  moves = 0,
+  background = 'background1';
 
 function loadGrid () {
   // Options to Set Grid Size
@@ -37,6 +38,7 @@ function createBoard () {
           // Makes a new div w/ a class: cell
           const cell = document.createElement('div');
           cell.classList.add('cell');
+          cell.classList.add(background);
 			// cell.classList.add('background1');
           // Stores the location of the cell
           cell.setAttribute('data-row',row);
@@ -317,7 +319,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   imageSelector.addEventListener('change', function () {
     const selectedValue = imageSelector.value;
-    const cells = document.querySelectorAll('.cell:not([data-empty])');
+    background = selectedValue;
+    const cells = document.querySelectorAll('.cell');
 
     // Loop through all cells and update their background class
     cells.forEach(cell => {
