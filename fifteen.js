@@ -25,7 +25,6 @@ function createBoard() {
           const cell = document.createElement('div');
           cell.classList.add('cell');
           cell.classList.add(background);
-			// cell.classList.add('background1');
           // Stores the location of the cell
           cell.setAttribute('data-row',row);
           cell.setAttribute('data-column',col);
@@ -222,7 +221,7 @@ function stopTimer() {
 // -----CODE: WINNING THE GAME-----
 function gameWon() {
   const cells = document.querySelectorAll('.cell');
-  for (const cell of cells) {
+  for (const cell of cells) { // Checks if each cell is in their correct position
     const location = `${cell.dataset.row}${cell.dataset.column}`;
     const imgLocation = cell.dataset.img;
     if (location != imgLocation) return false;
@@ -232,12 +231,13 @@ function gameWon() {
 function endGame() {
   stopTimer();
 
-  // Stores time to finish in past times
+  // Checks if time to finsh and # of moves used is less than the best of this session
   showBest(totalSeconds);
-  // Clears variables for next game
+  // Clears variables for next run
   totalSeconds = 0;
   moves = 0;
 }
+// Converts seconds to 'Time: minutes:seconds' format
 function secToMins(seconds) {
   const min = parseInt(seconds / 60);
   const sec = seconds % 60;
@@ -310,9 +310,9 @@ function setGrid(choice) { // choice = # of rows and columns
   createBoard();
   // Sets the new grid size
   const style = document.createElement('style');
-  if (choice > 8) {
+  if (choice > 8) { // Sets the smallest font-size for the largest grid size
     style.textContent = `.board { grid-template-columns: repeat(${choice}, ${cellWidth}px); font-size: 22pt; }`;
-  } else if (choice > 6) {
+  } else if (choice > 6) { // Shrinks font-size to fit on larger grid size
     style.textContent = `.board { grid-template-columns: repeat(${choice}, ${cellWidth}px); font-size: 24pt; }`;
   } else {
     style.textContent = `.board { grid-template-columns: repeat(${choice}, ${cellWidth}px); }`;
@@ -323,7 +323,9 @@ function setGrid(choice) { // choice = # of rows and columns
 // -----CODE: CHANGEABLE BACKGROUNDS-----
 // Randomizes the background variable referencing the backgrounds array
 function randomBackground()	{
+  // Chooses background randomly from backgrounds array
 	background = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+  // Sets the background name displayed in the Image Selector to the random background selected
   imgSel = document.querySelector('div.buttonRow select#imageSelector');
   const index = parseInt(background.substring('background'.length))-1;
   imgSel.selectedIndex = index;
@@ -332,10 +334,11 @@ function randomBackground()	{
 document.addEventListener('DOMContentLoaded', function () {
   const imageSelector = document.getElementById('imageSelector');
 
+  // When Image Selector is changed manually by the user
   imageSelector.addEventListener('change', function () {
     const selectedValue = imageSelector.value;
     background = selectedValue;
-    bgSetting = 'custom';
+    bgSetting = 'custom'; // Stops the background from changing randomly when changing grid sizes
     const cells = document.querySelectorAll('.cell');
 
     // Loop through all cells and update their background class
