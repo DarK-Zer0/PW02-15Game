@@ -119,7 +119,7 @@ function shiftCell(cell) {
     // Check for win condition
     moves++;
     let gameOver = gameWon();
-    if (gameOver) endGame();
+    if (gameOver && timer) endGame();
 }
 
 // -----CODE: SHUFFLE-----
