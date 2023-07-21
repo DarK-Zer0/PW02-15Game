@@ -366,7 +366,7 @@ pre {
     justify-content: center;
     margin-top: 10px;
 	font-size: 4em;
-	margin-bottom: 20p;
+	margin-bottom: 20px;
 }
 
 /* Best Times CSS */
@@ -424,3 +424,15 @@ div.best {
 	margin-bottom: 10px;
 	font-size: 18px;
   }
+
+  #bottomRightImages {
+	position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+#bottomRightImages img {
+    margin-left: 10px; /* adjust as needed */
+}
