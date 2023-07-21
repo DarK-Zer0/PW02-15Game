@@ -119,7 +119,7 @@ function shiftCell(cell) {
     // Check for win condition
     moves++;
     let gameOver = gameWon();
-    if (gameOver && timer) endGame();
+    if (gameOver) endGame();
 }
 
 // -----CODE: SHUFFLE-----
@@ -231,6 +231,8 @@ function gameWon() {
 function endGame() {
   stopTimer();
 
+  // Show the stats of the game in a notifcation
+  showGameStatus();
   // Checks if time to finsh and # of moves used is less than the best of this session
   showBest(totalSeconds);
   // Clears variables for next run
@@ -265,6 +267,28 @@ function showBest(secondsTaken) {
     const p = document.querySelector('.best p');
     p.innerHTML = `${secToMins(bestTime)} <br>Moves: ${leastMoves}`;
   }
+}
+
+// -----CODE: End-Game Notification-----
+function showPopup(time, moves, isWinner) {
+  const popupContainer = document.getElementById('popupContainer');
+  const totalTimeElement = document.getElementById('totalTime');
+  const totalMovesElement = document.getElementById('totalMoves');
+
+  // Update the content in the pop-up
+  totalTimeElement.textContent = secToMins(time);
+  totalMovesElement.textContent = moves;
+  // Show the pop-up container
+  popupContainer.style.display = 'block';
+}
+function showGameStatus() {
+  const won = true;
+  // If the game is won, show the pop-up with the winner image and the relevant data
+  showPopup(totalSeconds, moves, won); // Pass true to indicate the user wins
+}
+function closePopup() {
+  const popupContainer = document.getElementById('popupContainer');
+  popupContainer.style.display = 'none';
 }
 
 // -----CODE: CHANGEABLE GRID SIZES-----

@@ -52,6 +52,14 @@
 			<!-- Game Song -->
 			<audio controls autoplay loop src="game_song.mp3"></audio>
 
+			<!-- End-Game Notification -->
+			<div class="popupContainer" id ="popupContainer">
+				<p> Congratulations! <br> You have solved the puzzle! <br> </p>
+				<p > <span id="totalTime"></span> seconds</p>
+				<p >Total Moves: <span id="totalMoves"></span></p>
+				<button class="close-button" onclick="closePopup()">X</button>
+			</div>
+
             <!-- Javascript Functions -->
 			<script>createBoard();</script>
             <script>loadGrid();</script>

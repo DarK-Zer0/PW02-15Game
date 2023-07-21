@@ -389,4 +389,38 @@ div.best {
 	font-size: 22pt;
 }
 
-
+/* End-Game Notifcation CSS*/
+.popupContainer {
+	display: block;
+	position: absolute;
+	display: none;
+	
+	object-fit: cover;
+	background-image: url("./img/win.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	align-self: center;
+	width: 50%;
+	height: 70%;
+	top: 30%;
+	 /* Semi-transparent background */
+	z-index: 9999; 
+	border-style: solid;
+	border-radius: 10px ;/* Ensure the pop-up is on top of other elements */
+  }
+  .popupContainer .close-button {
+	/* Add styles for the close button */
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	
+	border: none;
+	font-size: 20px;
+	cursor: pointer;
+  }
+  .popupContainer p {
+	text-align: center;
+	margin-bottom: 10px;
+	font-size: 18px;
+  }
