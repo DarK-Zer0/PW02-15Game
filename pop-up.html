@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>15 Game</title>
+        <meta charset="utf-8">
+        <link rel="icon" href="./img/15GameIcon.png">
+        <link rel="stylesheet" href="./pop-up_styles.css">
+        <script type="text/javascript" src="./pop-up.js"></script>
+    </head>
+    <body>
+        <!-- Logo -->
+        <h2 class="game-header"> <img src="./img/sliding-puzzle.png"></h2>
+
+       <!-- Intro -->
+		<div class="rules-container">
+			<div class="rules">
+				<p>The goal of the fifteen puzzle is to un-jumble its fifteen squares by repeatedly making moves that slide squares<br>
+				into the empty space. How quickly can you solve it? Click Shuffle to begin!</p>
+			</div>
+		</div>
+		
+		<div class="gameBox">
+			<!-- Initial Load -->
+			<div class="board"></div>
+			
+			<div class="buttonRow">
+				<!-- Grid Size Options -->
+				<div class="gridSize"></div>
+
+				<!-- Shuffle Button-->
+				<div id="button">
+					<button onclick="shuffleBoard()">Shuffle</button>
+				</div>
+				
+                <!-- Background Image Options -->
+                <select id="imageSelector">
+                    <option value="background1">Bowser</option>
+                    <option value="background2">Bombette</option>
+                    <option value="background3">Goombella</option>
+                    <option value="background4">Parakarry</option>
+                    <option value="background5">Piranha Plant</option>
+                </select>
+            </div>
+
+        <!-- Timer Feature -->
+        <div class="timer-container">
+            <label id="minutes">00</label>
+            <label id="colon">:</label>
+            <label id="seconds">00</label>
+        </div>
+        
+        <!-- Game Song -->
+        <audio controls autoplay loop src="game_song.mp3"></audio>
+
+		<!-- pop-up div container-->
+        
+		<div class="popupContainer" id ="popupContainer">
+			<p> Congratulations! <br> You have solved the puzzle! <br> </p>
+			<p > <span id="totalTime"></span> seconds</p>
+			<p >Total Moves: <span id="totalMoves"></span></p>
+			<button class="close-button" onclick="closePopup()">X</button>
+		</div>
+		<button onclick="endGame()"> End Game </button>
+
+        <script>createBoard();</script>
+    </body>
+</html>
