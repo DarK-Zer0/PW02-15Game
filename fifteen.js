@@ -11,6 +11,20 @@ var rows = 4, cols = 4, gridSetting = 'default',
   backgrounds = ['background1', 'background2', 'background3', 'background4', 'background5'];
 
 // -----CODE: GAME BOARD-----
+// Retrieves the section of the image a cell should hold based on its stored data-img attribute
+function imgPos(cell) {
+  let imgData = cell.getAttribute('data-img');
+  let col = parseInt(imgData[0]);
+  let row = parseInt(imgData[1]);
+  let x = row * (-400 / rows);
+  let y = col * (-400 / cols);
+
+  return `${x}px ${y}px`;
+}
+// Loads the image section based on the stored data-img
+function loadImg(cell) {
+  cell.style.backgroundPosition = imgPos(cell);
+}
 function createBoard() {
   // Randomizes the background image chosen on start
   if (bgSetting == 'default') {
@@ -55,21 +69,7 @@ function createBoard() {
   });
 }
 
-// Retrieves the section of the image a cell should hold based on its stored data-img attribute
-function imgPos(cell) {
-    let imgData = cell.getAttribute('data-img');
-    let col = parseInt(imgData[0]);
-    let row = parseInt(imgData[1]);
-    let x = row * (-400 / rows);
-    let y = col * (-400 / cols);
-
-    return `${x}px ${y}px`;
-}
-// Loads the image section based on the stored data-img
-function loadImg(cell) {
-    cell.style.backgroundPosition = imgPos(cell);
-}
-
+// -----CODE: Moving Cells-----
 // Detects if a neighbor cell is the empty cell and returns a string containing the position of empty cell if true 
 function nearEmpty(cell) {
     const emptyCell = document.querySelector('[data-empty]');
