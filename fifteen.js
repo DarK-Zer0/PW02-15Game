@@ -124,6 +124,21 @@ function shiftCell(cell) {
 }
 
 // -----CODE: SHUFFLE-----
+// Swaps the content of two cells
+function swapCells(cell1, cell2) {
+  const tempDataImg = cell1.getAttribute('data-img');
+  const tempText = cell1.textContent;
+
+  cell1.setAttribute('data-img', cell2.getAttribute('data-img'));
+  cell1.textContent = cell2.textContent;
+
+  cell2.setAttribute('data-img', tempDataImg);
+  cell2.textContent = tempText;
+
+  cell1.style.backgroundPosition = imgPos(cell1);
+  cell2.style.backgroundPosition = imgPos(cell2);
+}
+// Shuffles the board by randomly swapping cells with the empty cell
 function shuffleBoard() {
   const cells = document.querySelectorAll('.cell:not([data-empty])');
 
@@ -170,24 +185,10 @@ function shuffleBoard() {
   } else {
     totalSeconds = 0;
   }
-}
-  
-// Swaps the content of two cells
-function swapCells(cell1, cell2) {
-  const tempDataImg = cell1.getAttribute('data-img');
-  const tempText = cell1.textContent;
-
-  cell1.setAttribute('data-img', cell2.getAttribute('data-img'));
-  cell1.textContent = cell2.textContent;
-
-  cell2.setAttribute('data-img', tempDataImg);
-  cell2.textContent = tempText;
-
-  cell1.style.backgroundPosition = imgPos(cell1);
-  cell2.style.backgroundPosition = imgPos(cell2);
-}
+}  
 
 // -----CODE: TIMER-----
+// Keeps track of the number of minutes:seconds since the last shuffle until game ends
 function runTimer() {
   // Timer Variables
   const minutesLabel = document.getElementById("minutes");
